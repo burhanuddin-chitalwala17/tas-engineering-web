@@ -258,3 +258,67 @@
 
   paintBusiness(); paintLines(); paintProducts(); paintTpi(); paintPriceList(); setBasket(getBasket()); gauge();
 })();
+
+/* ===== landing page showpieces ===== */
+(function () {
+  var T = window.TAS, D = T.load();
+  var reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  // big gauge ticks + labels (0..10 "bar")
+  var ticks = document.getElementById("bigTicks"), nums = document.getElementById("bigNums"), NS = "http://www.w3.org/2000/svg";
+  for (var i = 0; i <= 20; i++) {
+    var a = (-90 + i * 9) * Math.PI / 180, major = i % 2 === 0, r1 = major ? 78 : 83;
+    var l = document.createElementNS(NS, "line");
+    l.setAttribute("x1", 120 + r1 * Math.sin(a)); l.setAttribute("y1", 126 - r1 * Math.cos(a));
+    l.setAttribute("x2", 120 + 89 * Math.sin(a)); l.setAttribute("y2", 126 - 89 * Math.cos(a));
+    if (!major) l.setAttribute("stroke-width", "1");
+    ticks.appendChild(l);
+    if (i % 4 === 0) {
+      var t = document.createElementNS(NS, "text");
+      t.setAttribute("x", 120 + 66 * Math.sin(a)); t.setAttribute("y", 130 - 66 * Math.cos(a)); t.textContent = i / 2;
+      nums.appendChild(t);
+    }
+  }
+
+  // years counter
+  var since = parseInt(D.business.since, 10) || 2005, yrs = new Date().getFullYear() - since, el = document.getElementById("yrs");
+  if (reduce) el.textContent = yrs; else {
+    var t0 = performance.now() + 300;
+    (function tick(now) { var p = Math.min(1, Math.max(0, (now - t0) / 1600)); el.textContent = Math.round(yrs * (1 - Math.pow(1 - p, 3))); if (p < 1) requestAnimationFrame(tick); })(t0);
+  }
+
+  // open now (IST, Mon–Sat 10:00–20:00)
+  var ist = new Date(Date.now() + (330 + new Date().getTimezoneOffset()) * 60000);
+  var d = ist.getDay(), h = ist.getHours() + ist.getMinutes() / 60, open = d !== 0 && h >= 10 && h < 20;
+  var on = document.getElementById("openNow");
+  on.className = "open-now " + (open ? "open" : "closed");
+  on.querySelector("span").textContent = open ? "Open now · walk in or WhatsApp" : "Closed now · WhatsApp us, we reply when we open";
+
+  // marquee
+  var items = D.lines.map(function (l) { return "<span>" + T.esc(l.name) + " <b>◆</b></span>"; }).join("");
+  document.getElementById("marquee").innerHTML = items + items;
+
+  // product count
+  document.getElementById("prodCount").textContent = D.products.length;
+
+  // floating parts with mouse parallax
+  var F = document.getElementById("floaters");
+  var spots = [[4, 8, 90, "ball"], [78, 2, 120, "gauge"], [60, 40, 70, "fitting"], [88, 62, 100, "gate"], [30, 70, 80, "solenoid"], [48, 4, 60, "cock"], [12, 52, 70, "frl"], [70, 84, 64, "meter"]];
+  F.innerHTML = spots.map(function (s) { return '<span style="left:' + s[0] + '%;top:' + s[1] + '%" data-depth="' + (s[2] / 60) + '">' + T.icon(s[3], s[2]) + "</span>"; }).join("");
+  if (!reduce && matchMedia("(pointer:fine)").matches) {
+    var hero = document.querySelector(".hero");
+    hero.addEventListener("mousemove", function (e) {
+      var r = hero.getBoundingClientRect(), x = (e.clientX - r.left) / r.width - .5, y = (e.clientY - r.top) / r.height - .5;
+      F.querySelectorAll("span").forEach(function (s) { var k = +s.dataset.depth * 26; s.style.transform = "translate(" + (-x * k) + "px," + (-y * k) + "px)"; });
+    });
+  }
+
+  // reveal on scroll (content is visible by default; this only adds an entrance)
+  if (!reduce && "IntersectionObserver" in window) {
+    document.querySelectorAll(".block .head, .lines, .identify, .tools, .story, .visit, .numbers").forEach(function (el) {
+      el.classList.add("reveal");
+      var r = el.getBoundingClientRect(); if (r.top < innerHeight) return;
+      new IntersectionObserver(function (es, o) { es.forEach(function (x) { if (x.isIntersecting) { x.target.classList.add("in"); o.unobserve(x.target); } }); }, { threshold: .15 }).observe(el);
+    });
+  }
+})();
