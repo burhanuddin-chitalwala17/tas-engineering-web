@@ -281,10 +281,10 @@
   }
 
   // years counter
-  var since = parseInt(D.business.since, 10) || 2005, yrs = new Date().getFullYear() - since, el = document.getElementById("yrs");
-  if (reduce) el.textContent = yrs; else {
+  var yrs = 65, el = document.getElementById("yrs");
+  if (reduce) el.textContent = yrs + "+"; else {
     var t0 = performance.now() + 300;
-    (function tick(now) { var p = Math.min(1, Math.max(0, (now - t0) / 1600)); el.textContent = Math.round(yrs * (1 - Math.pow(1 - p, 3))); if (p < 1) requestAnimationFrame(tick); })(t0);
+    (function tick(now) { var p = Math.min(1, Math.max(0, (now - t0) / 1600)); el.textContent = Math.round(yrs * (1 - Math.pow(1 - p, 3))) + (p >= 1 ? "+" : ""); if (p < 1) requestAnimationFrame(tick); })(t0);
   }
 
   // open now (IST, Mon–Sat 10:00–20:00)
