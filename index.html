@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>T.A.S. Engineering Co. · Valves, Fittings & Gauges · S.P. Road, Bangalore</title>
+<meta name="description" content="Valves, fittings, gauges, FRL units and solenoid valves from S.P. Road, Bangalore since 2005. Send a photo of your part and get a price on WhatsApp.">
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="styles.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23d42a20'/%3E%3Ctext x='16' y='22' font-family='Arial' font-weight='900' font-size='13' fill='white' text-anchor='middle'%3ETAS%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+
+<div class="banner"><span class="demo-tag">DEMO</span><span id="banner"></span></div>
+
+<header class="top">
+  <div class="wrap">
+    <a class="logo" href="#top"><span class="badge">TAS</span><b>T.A.S. Engineering Co.</b></a>
+    <nav class="main" aria-label="Main">
+      <a href="#products">Products</a>
+      <a href="#identify">Identify a part</a>
+      <a href="#tools">Thread finder</a>
+      <a href="#prices">Price list</a>
+      <a href="#visit">Visit us</a>
+    </nav>
+    <button class="btn sm basket-btn" id="openBasket" type="button">Quote basket <span class="count" id="basketCount">0</span></button>
+  </div>
+  <div class="stripes" aria-hidden="true"><i></i><i></i><i></i></div>
+</header>
+
+<main id="top">
+<div class="wrap">
+
+  <section class="hero">
+    <span class="eyebrow">Valves · fittings · gauges · pneumatics — S.P. Road, Bangalore, since <span data-b="since"></span></span>
+    <div class="hero-grid">
+      <div style="display:grid;gap:22px">
+        <h1>Show us the part.<br><em>We'll find it.</em></h1>
+        <p class="lede">The same counter that has served plumbers, plant engineers and boiler houses on Sadar Patrappa Road for 20 years, now online. Search, send a photo, or build a quote basket and get a price on WhatsApp.</p>
+        <div class="search" role="search">
+          <input id="q" type="search" placeholder="Try “ball valve 1 inch” or “pressure gauge”" aria-label="Search products">
+          <kbd>/</kbd>
+        </div>
+        <div class="hero-actions">
+          <a class="btn red" href="#identify">📷 Send a photo of your part</a>
+          <a class="btn ghost" href="#products">Browse 10 product lines</a>
+        </div>
+      </div>
+      <div class="counter-card" aria-label="Shop details">
+        <div class="row"><span>Shop</span><span data-b="address"></span></div>
+        <div class="row"><span>Phone</span><span class="mono" data-b="phones"></span></div>
+        <div class="row"><span>Hours</span><span data-b="hours"></span></div>
+        <div class="row"><span>Email</span><span class="mono" data-b="email"></span></div>
+        <a class="btn wa" id="heroWa" href="#" target="_blank" rel="noopener">Chat on WhatsApp</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="lines">
+    <div class="head">
+      <div style="display:grid;gap:8px"><span class="eyebrow">What we stock</span><h2>Ten lines on one counter</h2></div>
+      <p class="muted">Pick a line to see sizes and prices. Not sure what you need? Send us a photo.</p>
+    </div>
+    <div class="lines" id="lineGrid"></div>
+  </section>
+
+  <section class="block" id="products">
+    <div class="head">
+      <div style="display:grid;gap:8px"><span class="eyebrow">Catalogue</span><h2 id="prodTitle">All products</h2></div>
+      <div class="toolbar">
+        <button class="chip" type="button" id="clearFilter" aria-pressed="false">Show all lines</button>
+        <label style="display:flex;align-items:center;gap:8px;font-weight:500"><input type="checkbox" id="inStock" style="width:auto"> In stock only</label>
+      </div>
+    </div>
+    <div class="products" id="productGrid"></div>
+  </section>
+
+  <section class="block" id="identify">
+    <div class="identify">
+      <div class="left">
+        <span class="eyebrow" style="color:#9aa1ad">Identify a part</span>
+        <h2>Got an old fitting in your hand?</h2>
+        <p>Take a photo of it. We'll tell you what it is, the size, and the price. Usually within the hour during shop hours.</p>
+        <ol class="steps">
+          <li><b>1</b><span>Photo of the part, ideally next to a ruler or coin</span></li>
+          <li><b>2</b><span>Your mobile number</span></li>
+          <li><b>3</b><span>We reply on WhatsApp with the match and price</span></li>
+        </ol>
+      </div>
+      <form class="form" id="identifyForm" style="padding:32px">
+        <label class="drop" id="drop" for="photo">
+          <span id="dropText">📷 <b>Tap to take or choose a photo</b><br><span class="muted" style="font-size:.85rem">JPG or PNG</span></span>
+          <input id="photo" type="file" accept="image/*" capture="environment" hidden>
+        </label>
+        <div class="two">
+          <label>Your name<input id="idName" autocomplete="name" placeholder="e.g. Ravi Kumar"></label>
+          <label>Mobile number<input id="idPhone" type="tel" inputmode="tel" required placeholder="10-digit mobile"></label>
+        </div>
+        <label>Anything else? (optional)<input id="idNote" placeholder="e.g. need 10 pieces, for a steam line"></label>
+        <button class="btn red" type="submit">Identify &amp; quote on WhatsApp</button>
+      </form>
+    </div>
+  </section>
+
+  <section class="block" id="tools">
+    <div class="head">
+      <div style="display:grid;gap:8px"><span class="eyebrow">Free tool</span><h2>BSP or NPT? Find your thread</h2></div>
+      <p class="muted">Count the threads in one inch of the fitting and tap the number. We'll tell you what you most likely have.</p>
+    </div>
+    <div class="tools">
+      <div class="tool">
+        <span class="eyebrow">Threads per inch (TPI)</span>
+        <div class="tpi" id="tpi"></div>
+        <div class="answer" id="tpiAnswer" aria-live="polite"></div>
+        <button class="btn" type="button" id="tpiShop">See matching fittings</button>
+      </div>
+      <div class="tool">
+        <svg class="thread-svg" viewBox="0 0 400 180" aria-label="How to count threads per inch">
+          <rect x="40" y="60" width="300" height="60" fill="none" stroke="currentColor" stroke-width="2"/>
+          <g id="threadLines" stroke="currentColor" stroke-width="2"></g>
+          <path d="M60 140h100" stroke="#d42a20" stroke-width="3"/>
+          <path d="M60 132v16M160 132v16" stroke="#d42a20" stroke-width="3"/>
+          <text x="110" y="168" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="13" fill="#d42a20">1 inch = 25.4 mm</text>
+          <text x="40" y="44" font-family="IBM Plex Mono, monospace" font-size="13" fill="currentColor">Count the ridges inside the red mark</text>
+        </svg>
+        <p class="muted" style="font-size:.9rem">Tip: parallel threads (BSPP) need a sealing washer. Tapered threads (BSPT, NPT) seal on the thread with tape. Bring it to the shop if unsure; we'll check it on a gauge.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="prices">
+    <div class="head">
+      <div style="display:grid;gap:8px"><span class="eyebrow">Price list · updated <span id="plDate"></span></span><h2>Today's prices, no phone call needed</h2></div>
+      <p class="muted">Enter your mobile number once to see the full list. Bulk rates on request.</p>
+    </div>
+    <div class="pricelist locked" id="pricelist">
+      <div class="scroll"><table><thead><tr><th>Product</th><th>Line</th><th>Sizes</th><th>From</th><th>Stock</th></tr></thead><tbody id="plBody"></tbody></table></div>
+      <div class="lock" id="lock">
+        <form class="box" id="unlockForm">
+          <h3>Unlock the full price list</h3>
+          <label>Mobile number<input id="plPhone" type="tel" inputmode="tel" required placeholder="10-digit mobile"></label>
+          <button class="btn red" type="submit">Show prices</button>
+          <span class="muted" style="font-size:.8rem">Live site: verified with a one-time code (OTP).</span>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="story">
+    <div class="head"><div style="display:grid;gap:8px"><span class="eyebrow">Our story</span><h2>One shop on S.P. Road</h2></div></div>
+    <div class="story">
+      <div><span class="yr" data-b="since"></span><h3>The counter opens</h3><p class="muted">A small shop at #164/1 Sadar Patrappa Road, in the heart of Bangalore's hardware market, selling valves and fittings to the trade.</p></div>
+      <div><span class="yr">Today</span><h3>Ten product lines</h3><p class="muted">From a ¼" gauge cock to boiler mountings. Walk-in plumbers, contractors and factory purchase teams.</p></div>
+      <div><span class="yr">Next</span><h3>The counter goes online</h3><p class="muted">Same advice, same prices. Now from your phone, anywhere in Bangalore.</p></div>
+    </div>
+  </section>
+
+  <section class="block" id="visit">
+    <div class="head"><div style="display:grid;gap:8px"><span class="eyebrow">Visit or call</span><h2>Find the counter</h2></div></div>
+    <div class="visit">
+      <div class="card">
+        <h3 data-b="name"></h3>
+        <p data-b="address"></p>
+        <p><span class="eyebrow">Phone</span><br><span class="mono" data-b="phones"></span></p>
+        <p><span class="eyebrow">Telefax</span><br><span class="mono" data-b="telefax"></span></p>
+        <p><span class="eyebrow">Email</span><br><span class="mono" data-b="email"></span></p>
+        <p><span class="eyebrow">Hours</span><br><span data-b="hours"></span></p>
+      </div>
+      <div class="map">
+        <span style="font-size:2.4rem">📍</span>
+        <p><b>Sadar Patrappa Road</b><br><span class="muted">Near Avenue Road / Chickpet, Bangalore 560002</span></p>
+        <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=164%2F1+Sadar+Patrappa+Road+Bangalore+560002">Open in Google Maps</a>
+      </div>
+    </div>
+  </section>
+
+</div>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <div class="stripes" aria-hidden="true" style="max-width:220px"><i></i><i></i><i></i></div>
+    <p><b data-b="name"></b> · <span data-b="address"></span></p>
+    <p class="mono" style="font-size:.85rem"><span data-b="phones"></span> · <span data-b="email"></span></p>
+    <p style="font-size:.8rem">Demo build for review. Prices shown are sample figures. · <a href="admin.html">Admin</a></p>
+  </div>
+</footer>
+
+<div class="gauge" aria-hidden="true">
+  <svg viewBox="0 0 120 74">
+    <path d="M14 60 A46 46 0 0 1 106 60" fill="none" stroke="#dadfe8" stroke-width="8"/>
+    <path d="M78 18.5 A46 46 0 0 1 106 60" fill="none" stroke="#1f8a55" stroke-width="8"/>
+    <g id="ticks" stroke="#131a2c" stroke-width="1.4"></g>
+    <line id="needle" x1="60" y1="60" x2="60" y2="20" stroke="#d42a20" stroke-width="2.6" stroke-linecap="round"/>
+    <circle cx="60" cy="60" r="5" fill="#131a2c"/>
+  </svg>
+  <div class="read" id="read">0.0 bar</div>
+</div>
+
+<div id="slip"></div>
+
+<script src="data.js"></script>
+<script src="common.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
